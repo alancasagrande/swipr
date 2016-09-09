@@ -11,7 +11,7 @@ var swipr = function (parentElement, opts) {
 
     /**
      * onPanstart function: called when panning kicks off
-     */    
+     */
     var onPanstart = function (event) {
 
         resetSlider()
@@ -101,7 +101,7 @@ var swipr = function (parentElement, opts) {
 
     /**
      * findAncestor: find an ancestor
-     */     
+     */
     var findAncestor = function (el, cls) {
         while ((el = el.parentElement) && !el.classList.contains(cls));
         return el;
@@ -126,13 +126,13 @@ var swipr = function (parentElement, opts) {
 
 
     /* initialize hammerjs on the slider element */
-    var mc = new Hammer(config.domElements.slideContainer);    
+    var mc = new Hammer(config.domElements.slideContainer);
     mc.on("panstart", onPanstart);
 
 
     /**
      * next function: called on clickhandler
-     */     
+     */
     var next = function (event) {
 
         resetSlider()
@@ -206,8 +206,14 @@ var swipr = function (parentElement, opts) {
         config.domElements.prevCtrl.addEventListener('click', prev);
     }
 
+    function resetIndex (index) {
+       if (config.options.index === index) { return; }
+       config.options.index = index;
+       slide();
+     }
 
     return {
+        resetIndex: resetIndex,
         next: next,
         prev: prev
     };
